@@ -20,18 +20,32 @@
       }
 
       body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         background-color: #1b1b1b;
       }
     </style>
   </head>
-  <body>
-    <div class="btn-group btn-group-lg me-2" role="group" aria-label="First group">
-      <a href="/Easy.html" class="btn btn-success" title="Easy Problems" target="_blank">Easy Problems</a>
-      <a href="/Medium.html" class="btn btn-warning" title="Medium Problems" target="_blank">Medium Problems</a>
-      <a href="/Hard.html" class="btn btn-danger" title="Hard Problems" target="_blank">Hard Problems</a>
+  <body class="d-flex justify-content-center align-items-center">
+    <div class="container d-flex justify-content-center">
+      <div id="btnGroup" class="btn-group btn-group-lg me-2" role="group" aria-label="First group">
+        <a href="/Easy.html" class="btn btn-success" title="Easy Problems" target="_blank">Easy Problems</a>
+        <a href="/Medium.html" class="btn btn-warning" title="Medium Problems" target="_blank">Medium Problems</a>
+        <a href="/Hard.html" class="btn btn-danger" title="Hard Problems" target="_blank">Hard Problems</a>
+      </div>
     </div>
+
+    <script>
+      function setButtonGroupType() {
+        const innerWidth = window.innerWidth;
+        const btnGroupEle = document.getElementById('btnGroup');
+        if (innerWidth && innerWidth <= 600) {
+          btnGroupEle.classList.replace('btn-group', 'btn-group-vertical');
+        } else {
+          btnGroupEle.classList.replace('btn-group-vertical', 'btn-group');
+        }
+      }
+
+      window.addEventListener('load', setButtonGroupType);
+      window.addEventListener('resize', setButtonGroupType);
+    </script>
   </body>
 </html>

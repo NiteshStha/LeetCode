@@ -28,7 +28,7 @@ code {
 }
 ;">
 <h1>Leet Code</h1>
-<h6>Easy Problems</h6>
+<h6>Medium Problems</h6>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-class="invert" data-theme="uncover" data-style=".columns {
     display: grid;
@@ -49,23 +49,46 @@ code {
   border-radius: 10px;
 }
 ;">
-<h4>1. Two Sum</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span>[] <span class="hljs-title">TwoSum</span>(<span class="hljs-params"><span class="hljs-built_in">int</span>[] nums, <span class="hljs-built_in">int</span> target</span>)</span>
-    {
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.Length; i++)
-        {
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = i + <span class="hljs-number">1</span>; j &lt; nums.Length; j++)
+<h4>15. 3Sum</h4>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
+    <span class="hljs-keyword">public</span> IList&lt;IList&lt;<span class="hljs-built_in">int</span>&gt;&gt; ThreeSum(<span class="hljs-built_in">int</span>[] nums) {
+        IList&lt;IList&lt;<span class="hljs-built_in">int</span>&gt;&gt; list = <span class="hljs-keyword">new</span> List&lt;IList&lt;<span class="hljs-built_in">int</span>&gt;&gt;();
+            Array.Sort(nums);
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.Length; i++)
             {
-                <span class="hljs-keyword">if</span> (i != j &amp;&amp; nums[i] + nums[j] == target)
+                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i - <span class="hljs-number">1</span>] == nums[i])
                 {
-                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { i, j };
+                    <span class="hljs-keyword">continue</span>;
+                }
+
+                <span class="hljs-built_in">int</span> j = i + <span class="hljs-number">1</span>;
+                <span class="hljs-built_in">int</span> k = nums.Length - <span class="hljs-number">1</span>;
+
+                <span class="hljs-keyword">while</span> (j &lt; k)
+                {
+                    <span class="hljs-built_in">int</span> sum = nums[i] + nums[j] + nums[k];
+                    <span class="hljs-keyword">if</span> (sum &gt; <span class="hljs-number">0</span>)
+                    {
+                        k--;
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sum &lt; <span class="hljs-number">0</span>)
+                    {
+                        j++;
+                    }
+                    <span class="hljs-keyword">else</span>
+                    {
+                        list.Add(<span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">int</span>&gt;() { nums[i], nums[j], nums[k] });
+                        j++;
+                        <span class="hljs-keyword">while</span> (nums[j - <span class="hljs-number">1</span>] == nums[j] &amp;&amp; j &lt; k)
+                        {
+                            j++;
+                        }
+                    }
                 }
             }
-        }
 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">0</span>, <span class="hljs-number">0</span> };
+            <span class="hljs-keyword">return</span> list;
     }
 }
 </code></pre>
@@ -89,367 +112,15 @@ code {
   border-radius: 10px;
 }
 ;">
-<h4>9. Palindrome Number</h4>
+<h4>28. Find the Index of the First Occurrence in a String</h4>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">IsPalindrome</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> x</span>)</span> {
-        <span class="hljs-built_in">int</span> temp = x;
-        <span class="hljs-built_in">int</span> sum = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (temp &gt; <span class="hljs-number">0</span>)
-        {
-            <span class="hljs-built_in">int</span> rem = temp % <span class="hljs-number">10</span>;
-            temp /= <span class="hljs-number">10</span>;
-            sum = sum * <span class="hljs-number">10</span> + rem;
-        }
-
-        <span class="hljs-keyword">if</span> (sum == x)
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-        <span class="hljs-keyword">else</span>
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">StrStr</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> haystack, <span class="hljs-built_in">string</span> needle</span>)</span> {
+        <span class="hljs-keyword">return</span> haystack.IndexOf(needle);
     }
 }
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>13. Roman to Integer</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">RomanToInt</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span> {
-        Dictionary&lt;<span class="hljs-built_in">char</span>, <span class="hljs-built_in">int</span>&gt; romanMapping = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">char</span>, <span class="hljs-built_in">int</span>&gt;()
-        {
-            { <span class="hljs-string">&#x27;I&#x27;</span>, <span class="hljs-number">1</span> },
-            { <span class="hljs-string">&#x27;V&#x27;</span>, <span class="hljs-number">5</span> },
-            { <span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-number">10</span> },
-            { <span class="hljs-string">&#x27;L&#x27;</span>, <span class="hljs-number">50</span> },
-            { <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-number">100</span> },
-            { <span class="hljs-string">&#x27;D&#x27;</span>, <span class="hljs-number">500</span> },
-            { <span class="hljs-string">&#x27;M&#x27;</span>, <span class="hljs-number">1000</span> }
-        };
-
-        <span class="hljs-built_in">int</span> sum = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; s.Length; i++)
-        {
-            <span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span> = romanMapping[s[i]];
-            <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; s.Length &amp;&amp; romanMapping[s[i + <span class="hljs-number">1</span>]] &gt; <span class="hljs-keyword">value</span>)
-            {
-                sum -= <span class="hljs-keyword">value</span>;
-            }
-            <span class="hljs-keyword">else</span>
-            {
-                sum += <span class="hljs-keyword">value</span>;
-            }
-        }
-
-        <span class="hljs-keyword">return</span> sum;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>14. Longest Common Prefix</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">LongestCommonPrefix</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] strs</span>)</span>
-    {
-        <span class="hljs-built_in">string</span> first = strs[<span class="hljs-number">0</span>];
-        <span class="hljs-built_in">string</span> str = <span class="hljs-string">&quot;&quot;</span>;
-        <span class="hljs-built_in">string</span> cs = <span class="hljs-string">&quot;&quot;</span>;
-        <span class="hljs-built_in">int</span> totalStrings = strs.Length;
-
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; first.Length; i++)
-        {
-            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>)
-                cs = first[i].ToString();
-
-            <span class="hljs-built_in">int</span> count = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt; strs.Length; j++)
-            {
-                <span class="hljs-keyword">if</span> (strs[j].StartsWith(cs))
-                {
-                    count++;
-                }
-            }
-            <span class="hljs-keyword">if</span> (count == totalStrings)
-            {
-                str += first[i];
-
-                <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; first.Length)
-                    cs += first[i + <span class="hljs-number">1</span>];
-            }
-            <span class="hljs-keyword">else</span>
-            {
-                <span class="hljs-keyword">break</span>;
-            }
-        }
-
-        <span class="hljs-keyword">return</span> str;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>20. Valid Parentheses</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">IsValid</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span>
-    {
-        Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt; bracketMapping = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;()
-        {
-            { <span class="hljs-string">&quot;(&quot;</span>, <span class="hljs-string">&quot;)&quot;</span> },
-            { <span class="hljs-string">&quot;{&quot;</span>, <span class="hljs-string">&quot;}&quot;</span> },
-            { <span class="hljs-string">&quot;[&quot;</span>, <span class="hljs-string">&quot;]&quot;</span> },
-        };
-
-        <span class="hljs-keyword">if</span> (s.Length % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>)
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-
-        Stack&lt;<span class="hljs-built_in">string</span>&gt; brackets = <span class="hljs-keyword">new</span> Stack&lt;<span class="hljs-built_in">string</span>&gt;();
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; s.Length; i++)
-        {
-            <span class="hljs-keyword">if</span> (brackets.Any())
-            {
-                <span class="hljs-keyword">if</span> (bracketMapping.ContainsValue(s[i].ToString()))
-                {
-                    <span class="hljs-keyword">if</span> (brackets.ElementAt(<span class="hljs-number">0</span>) == bracketMapping.FirstOrDefault(x =&gt; x.Value == s[i].ToString()).Key)
-                    {
-                        brackets.Pop();
-                    }
-                    <span class="hljs-keyword">else</span>
-                    {
-                        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-                    }
-                }
-                <span class="hljs-keyword">else</span>
-                {
-                    brackets.Push(s[i].ToString());
-                }
-            }
-            <span class="hljs-keyword">else</span>
-            {
-                brackets.Push(s[i].ToString());
-            }
-        }
-
-        <span class="hljs-keyword">if</span> (brackets.Count &gt; <span class="hljs-number">0</span>)
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>27. Remove Element</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">RemoveElement</span>(<span class="hljs-params"><span class="hljs-built_in">int</span>[] nums, <span class="hljs-built_in">int</span> val</span>)</span> {
-        <span class="hljs-built_in">int</span> count = <span class="hljs-number">0</span>, e = nums.Length;
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; e; i++)
-            {
-                <span class="hljs-keyword">if</span> (nums[i] != val)
-                {
-                    nums[count++] = nums[i];
-                }
-            }
-            <span class="hljs-keyword">return</span> count;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>35. Search Insert Position</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">SearchInsert</span>(<span class="hljs-params"><span class="hljs-built_in">int</span>[] nums, <span class="hljs-built_in">int</span> target</span>)</span> {
-        <span class="hljs-built_in">int</span> index = nums.Length;
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.Length; i++)
-        {
-            <span class="hljs-keyword">if</span> (nums[i] &gt;= target)
-            {
-                <span class="hljs-keyword">return</span> i;
-            }
-        }
-
-        <span class="hljs-keyword">return</span> index;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>58. Length of Last Word</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">LengthOfLastWord</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span> {
-        <span class="hljs-built_in">string</span> last = s.Trim().Split(<span class="hljs-string">&#x27; &#x27;</span>).Last();
-        <span class="hljs-keyword">return</span> last.Length;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-class="invert" data-theme="uncover" data-style=".columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-" class="invert" style="--class:invert;--theme:uncover;--style:.columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-code {
-  border-radius: 10px;
-}
-;">
-<h4>66. Plus One</h4>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlusOne</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span>[] <span class="hljs-title">Run</span>(<span class="hljs-params"><span class="hljs-built_in">int</span>[] digits</span>)</span>
-    {
-        <span class="hljs-comment">// Get the length of the array</span>
-        <span class="hljs-built_in">int</span> n = digits.Length;
-        <span class="hljs-comment">// Increment the last digit by 1</span>
-        digits[n - <span class="hljs-number">1</span>]++;
-        <span class="hljs-comment">// Iterate through the array in reverse order (from the second last digit)</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--)
-        {
-            <span class="hljs-comment">// If a digit is equal to 10, set it to 0 and increment the previous digit by 1</span>
-            <span class="hljs-keyword">if</span> (digits[i] == <span class="hljs-number">10</span>)
-            {
-                digits[i] = <span class="hljs-number">0</span>;
-                digits[i - <span class="hljs-number">1</span>]++;
-            }
-        }
-        <span class="hljs-comment">// If the first digit is also 10 after the iteration, set it to 0</span>
-        <span class="hljs-keyword">if</span> (digits[<span class="hljs-number">0</span>] == <span class="hljs-number">10</span>)
-        {
-            digits[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
-            <span class="hljs-comment">// Create a new array with one more digit than the original array</span>
-            <span class="hljs-built_in">int</span>[] newDigits = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[n + <span class="hljs-number">1</span>];
-            <span class="hljs-comment">// Set the first digit to 1</span>
-            newDigits[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
-            <span class="hljs-comment">// Copy the rest of the digits from the original array</span>
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)
-            {
-                newDigits[i] = digits[i - <span class="hljs-number">1</span>];
-            }
-            <span class="hljs-comment">// return the new incremented array</span>
-            <span class="hljs-keyword">return</span> newDigits;
-        }
-        <span class="hljs-comment">// return the original incremented array</span>
-        <span class="hljs-keyword">return</span> digits;
-    }
-}
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-class="invert" data-theme="uncover" data-style=".columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
