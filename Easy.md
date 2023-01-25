@@ -265,3 +265,96 @@ public class Solution {
     }
 }
 ```
+
+---
+
+#### 28. Find the Index of the First Occurrence in a String
+
+```c#
+public class Solution {
+    public int StrStr(string haystack, string needle) {
+        return haystack.IndexOf(needle);
+    }
+}
+```
+
+---
+
+#### 35. Search Insert Position
+
+```c#
+public class Solution {
+    public int SearchInsert(int[] nums, int target) {
+        int index = nums.Length;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] >= target)
+            {
+                return i;
+            }
+        }
+
+        return index;
+    }
+}
+```
+
+---
+
+#### 58. Length of Last Word
+
+```c#
+public class Solution {
+    public int LengthOfLastWord(string s) {
+        string last = s.Trim().Split(' ').Last();
+        return last.Length;
+    }
+}
+```
+
+---
+
+#### 66. Plus One
+
+```c#
+public static class PlusOne
+{
+    public static int[] Run(int[] digits)
+    {
+        // Get the length of the array
+        int n = digits.Length;
+        // Increment the last digit by 1
+        digits[n - 1]++;
+        // Iterate through the array in reverse order (from the second last digit)
+        for (int i = n - 1; i > 0; i--)
+        {
+            // If a digit is equal to 10, set it to 0 and increment the previous digit by 1
+            if (digits[i] == 10)
+            {
+                digits[i] = 0;
+                digits[i - 1]++;
+            }
+        }
+        // If the first digit is also 10 after the iteration, set it to 0
+        if (digits[0] == 10)
+        {
+            digits[0] = 0;
+            // Create a new array with one more digit than the original array
+            int[] newDigits = new int[n + 1];
+            // Set the first digit to 1
+            newDigits[0] = 1;
+            // Copy the rest of the digits from the original array
+            for (int i = 1; i <= n; i++)
+            {
+                newDigits[i] = digits[i - 1];
+            }
+            // return the new incremented array
+            return newDigits;
+        }
+        // return the original incremented array
+        return digits;
+    }
+}
+```
+
+---
